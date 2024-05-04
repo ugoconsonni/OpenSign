@@ -4,13 +4,14 @@ import formData from 'form-data';
 import Mailgun from 'mailgun.js';
 import { updateMailCount } from '../../Utils.js';
 import sendMailGmailProvider from './sendMailGmailProvider.js';
+import nodemailer from 'nodemailer';
 async function sendMailProvider(req) {
   try {
     let transporterSMTP;
     let mailgunClient;
     let mailgunDomain;
     if (process.env.SMTP_ENABLE) {
-      transporterSMTP = createTransport({
+      transporterSMTP = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
         port: process.env.SMTP_PORT || 465,
         secure: process.env.SMTP_SECURE || true,
